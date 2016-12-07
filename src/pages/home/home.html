@@ -5,6 +5,14 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+       pullingIcon="arrow-dropdown" 
+       pullingText="Puxe para atualizar" 
+       refreshingSpinner="circles"
+       refreshingText="Atualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list>
     <button ion-item *ngFor="let feed of feeds" (click)="itemSelected(feed.data.url)">
       <ion-avatar item-left>
@@ -15,6 +23,6 @@
     </button>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content loadingText="Carregando mais artigos"></ion-infinite-scroll-content>
+    <ion-infinite-scroll-content loadingText="Carregando mais artigos..."></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

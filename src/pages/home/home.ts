@@ -16,7 +16,8 @@ export class HomePage {
 
   public feeds: Array<any>;
   private url: string = "https://www.reddit.com/new.json";
-  private olderPosts: string = "https://www.reddit.com/new.json?after="; 
+  private olderPosts: string = "https://www.reddit.com/new.json?after=";
+  private newerPosts: string = "https://www.reddit.com/new.json?before="; 
 
   constructor(public navCtrl: NavController, public http: Http, public loadingCtrl: LoadingController) {
 
@@ -62,6 +63,23 @@ export class HomePage {
       })
 
       infiniteScroll.complete();
+    });
+  }
+
+  doRefresh (refresher) {
+    let paramsUrl = this.feeds[0].data.name;
+
+    this.http.get(this.newerPosts + paramsUrl).map(res => res.json())
+    .subscribe(data => {
+      this.feeds = data.data.children.concat(this.feeds);
+
+      this.feeds.forEach((e, i, a) => {
+        if (!e.data.thumbnail || e.data.thumbnail.indexOf('b.thumbs.redditmedia.com') === -1) {
+          e.data.thumbnail = 'http://www.redditstatic.com/icon.png';
+        }
+      })
+
+      refresher.complete();
     });
   }
 }
