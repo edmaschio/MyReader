@@ -14,4 +14,7 @@
       <p>{{feed.data.domain}}</p>
     </button>
   </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Carregando mais artigos"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
