@@ -1,7 +1,12 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Meu Leitor de Feed
-      <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterItems()" placeholder="Digite aqui..."> </ion-searchbar>
+      <ion-searchbar 
+        [(ngModel)]="searchTerm"
+        [formControl]="searchTermControl"
+        [showCancelButton]=true
+        (ionInput)="filterItems()" 
+        placeholder="Digite aqui..."> </ion-searchbar>
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="showFilters()">
